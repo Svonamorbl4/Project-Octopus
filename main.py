@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 import asyncio
 import sys
 import os
@@ -8,6 +7,7 @@ from PyQt5.QtWidgets import QTableWidgetItem
 import interface
 from modules.mTest import mTest
 from modules.mInstallation import mInstallation
+from modules.mDeinstallation import mDeinstallation
 from interface import Ui_MainWindow
 # from modules.mPing import mPing
 import paramiko
@@ -87,7 +87,7 @@ class ExampleApp(QtWidgets.QMainWindow, interface.Ui_MainWindow):
                     self.statusBrowser.addItem(host[1] + "\tFAILED")
                 else:
                     self.statusBrowser.addItem(host[1] + "\t\tFAILED")
-        print(self.goodHosts)
+        # print(self.goodHosts)
 
     def clear(self):
         self.statusBrowser.clear()
@@ -127,7 +127,23 @@ class ExampleApp(QtWidgets.QMainWindow, interface.Ui_MainWindow):
                         print(result)
             else:
                 self.statusBrowser.clear()
-                self.statusBrowser.addItem('You have not given any parametres to the module!')
+                self.statusBrowser.addItem('You have not given any parameters to the module!')
+        elif self.comboBtn.currentText() == 'Deinstallation':
+            pkgName = self.commandLine.text()
+            if pkgName:
+                for host in self.goodHosts:
+                    # result = mInstallation(host[0], host[1], host[2], pkgName)
+                    task = asyncio.create_task(mDeinstallation(host[0], host[1], host[2], pkgName))
+                    result = await task
+                    if result:
+                        self.statusBrowser.addItem(host[1] + ' - FAILED')
+                        print(result)
+                    else:
+                        self.statusBrowser.addItem(host[1] + ' - OK')
+                        print(result)
+            else:
+                self.statusBrowser.clear()
+                self.statusBrowser.addItem('You have not given any parameters to the module!')
 
 # Функция для отрисовки GUI
 def main():
