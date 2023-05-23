@@ -1,4 +1,1 @@
 svonamor@192.168.1.218@0
-fake@192.168.1.15@asf12sfad
-virtualmachine@192.168.1.200@1234
-svonamor@192.168.1.118@0

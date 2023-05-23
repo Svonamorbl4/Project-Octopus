@@ -8,6 +8,7 @@ import interface
 from modules.mTest import mTest
 from modules.mInstallation import mInstallation
 from modules.mDeinstallation import mDeinstallation
+from modules.mNginx import mNginx
 from interface import Ui_MainWindow
 # from modules.mPing import mPing
 import paramiko
@@ -22,6 +23,7 @@ class ExampleApp(QtWidgets.QMainWindow, interface.Ui_MainWindow):
         modules = ['Test',
                    'Installation',
                    'Deinstallation',
+                   'Nginx'
                    ]
         self.comboBtn.addItems(modules)
 
@@ -144,6 +146,18 @@ class ExampleApp(QtWidgets.QMainWindow, interface.Ui_MainWindow):
             else:
                 self.statusBrowser.clear()
                 self.statusBrowser.addItem('You have not given any parameters to the module!')
+        elif self.comboBtn.currentText() == 'Nginx':
+            for host in self.goodHosts:
+                # result = mInstallation(host[0], host[1], host[2], pkgName)
+                task = asyncio.create_task(mNginx(host[0], host[1], host[2]))
+                result = await task
+                if result:
+                    self.statusBrowser.addItem(host[1] + ' - FAILED')
+                    print(result)
+                else:
+                    self.statusBrowser.addItem(host[1] + ' - OK')
+                    print(result)
+
 
 # Функция для отрисовки GUI
 def main():

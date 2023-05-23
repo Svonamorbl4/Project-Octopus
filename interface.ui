@@ -10,13 +10,25 @@
     <x>0</x>
     <y>0</y>
     <width>1150</width>
-    <height>686</height>
+    <height>660</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>1150</width>
+    <height>660</height>
+   </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>16777215</width>
-    <height>16777215</height>
+    <width>1150</width>
+    <height>660</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -30,7 +42,7 @@
     <property name="geometry">
      <rect>
       <x>360</x>
-      <y>50</y>
+      <y>20</y>
       <width>371</width>
       <height>41</height>
      </rect>
@@ -98,8 +110,8 @@ color: rgba(0, 0, 0, 206);
    <widget class="QLabel" name="footer">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>640</y>
+      <x>140</x>
+      <y>610</y>
       <width>1151</width>
       <height>41</height>
      </rect>
@@ -273,7 +285,7 @@ border-radius: 8px;</string>
      <set>Qt::AlignCenter</set>
     </property>
     <property name="placeholderText">
-     <string>Command line</string>
+     <string>Input commmand or parameters</string>
     </property>
     <property name="clearButtonEnabled">
      <bool>true</bool>
@@ -344,8 +356,8 @@ color: #2f80ed;</string>
    <widget class="QListWidget" name="statusBrowser">
     <property name="geometry">
      <rect>
-      <x>760</x>
-      <y>110</y>
+      <x>750</x>
+      <y>80</y>
       <width>371</width>
       <height>481</height>
      </rect>
@@ -360,7 +372,7 @@ color: white;</string>
     <property name="geometry">
      <rect>
       <x>760</x>
-      <y>50</y>
+      <y>20</y>
       <width>371</width>
       <height>41</height>
      </rect>
@@ -422,7 +434,7 @@ color: rgba(0, 0, 0, 206);
 }</string>
     </property>
     <property name="text">
-     <string>Paremeters</string>
+     <string>Command row</string>
     </property>
    </widget>
    <widget class="QPushButton" name="clearBtn">
@@ -431,8 +443,8 @@ color: rgba(0, 0, 0, 206);
     </property>
     <property name="geometry">
      <rect>
-      <x>760</x>
-      <y>590</y>
+      <x>750</x>
+      <y>560</y>
       <width>371</width>
       <height>31</height>
      </rect>
@@ -471,7 +483,7 @@ color: #2f80ed;
     <property name="geometry">
      <rect>
       <x>360</x>
-      <y>110</y>
+      <y>80</y>
       <width>381</width>
       <height>511</height>
      </rect>
