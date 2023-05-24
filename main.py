@@ -4,14 +4,21 @@ import os
 from PyQt5 import QtWidgets, QtGui, QtCore
 import subprocess
 from PyQt5.QtWidgets import QTableWidgetItem
+from PyQt5.QtCore import QObject, QThread, pyqtSignal
 import interface
 from modules.mTest import mTest
 from modules.mInstallation import mInstallation
 from modules.mDeinstallation import mDeinstallation
 from modules.mNginx import mNginx
+from threading import *
 from interface import Ui_MainWindow
 # from modules.mPing import mPing
 import paramiko
+
+# Класс ядер
+# class Worker(QObject):
+#     finished = pyqtSignal()
+#     progress = pyqtSignal(int)
 
 # Класс приложения
 class ExampleApp(QtWidgets.QMainWindow, interface.Ui_MainWindow):
@@ -28,11 +35,22 @@ class ExampleApp(QtWidgets.QMainWindow, interface.Ui_MainWindow):
         self.comboBtn.addItems(modules)
 
         self.inventoryBtn.clicked.connect(self.inventory)
-        self.accessibilityBtn.clicked.connect(self.accessibility)
+        self.accessibilityBtn.clicked.connect(self.threadAccess)
+        # threading.Thread(target=self.useAction, args=()).start()
 
         # self.actionBtn.clicked.connect(self.action)
-        self.actionBtn.clicked.connect(self.useAction)
+        self.actionBtn.clicked.connect(self.threadAction)
         self.clearBtn.clicked.connect(self.clear)
+
+        # threading.Thread(target=self.accessibility).start()
+
+    def threadAccess(self):
+        th = Thread(target=self.accessibility)
+        th.start()
+
+    def threadAction(self):
+        th = Thread(target=self.useAction)
+        th.start()
 
     # Метод создания таблицы с хостами
     def createTable(self):
@@ -97,6 +115,7 @@ class ExampleApp(QtWidgets.QMainWindow, interface.Ui_MainWindow):
 
     def useAction(self):
         asyncio.run(self.action())
+        # threading.Thread(target=self.action, daemon=True).start()
 
 
     # Метод для вызова модуля
